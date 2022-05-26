@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
-class EmployeeController extends Controller
-{
+class EmployeeController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $employees = Employee::paginate(50);
+
+        return view('customer.contact.employee.index', compact('employees'));
     }
 
     /**
@@ -21,9 +23,8 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('customer.contact.employee.create');
     }
 
     /**
@@ -32,9 +33,40 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+
+        if ($request->hasFile('image')) {
+
+            $image_file = $request->file('image');
+
+            if ($image_file) {
+
+                $img_gen   = hexdec(uniqid());
+                $image_url = 'images/employee/';
+                $image_ext = strtolower($image_file->getClientOriginalExtension());
+
+                $img_name    = $img_gen . '.' . $image_ext;
+                $final_name1 = $image_url . $img_gen . '.' . $image_ext;
+
+                $image_file->move($image_url, $img_name);
+            }
+
+        }
+
+        Employee::create([
+            'shop_id'     => SID(),
+            'name'        => $request->name,
+            'phone'       => $request->phone,
+            'email'       => $request->email,
+            'image'       => $final_name1 ?? null,
+            'designation' => $request->designation,
+            'employee_id' => $request->employee_id,
+            'salary'      => $request->salary,
+            'address'     => $request->address,
+        ]);
+
+        return redirect()->route('customer.employees.index')->withToastSuccess('employee added successfully!!');
+
     }
 
     /**
@@ -43,8 +75,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -54,9 +85,8 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Employee $employee) {
+        return view('customer.contact.employee.edit', compact('employee'));
     }
 
     /**
@@ -66,9 +96,48 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Employee $employee) {
+
+        if ($request->hasFile('image')) {
+
+            $image_file = $request->file('image');
+
+            if ($image_file) {
+
+                $image_path = public_path($employee->image);
+
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+
+                $img_gen   = hexdec(uniqid());
+                $image_url = 'images/employee/';
+                $image_ext = strtolower($image_file->getClientOriginalExtension());
+
+                $img_name    = $img_gen . '.' . $image_ext;
+                $final_name1 = $image_url . $img_gen . '.' . $image_ext;
+
+                $image_file->move($image_url, $img_name);
+                $employee->update(
+                    [
+                        'image' => $final_name1,
+                    ]
+                );
+            }
+
+        }
+
+        $employee->update([
+            'name'        => $request->name,
+            'phone'       => $request->phone,
+            'email'       => $request->email,
+            'designation' => $request->designation,
+            'employee_id' => $request->employee_id,
+            'salary'      => $request->salary,
+            'address'     => $request->address,
+        ]);
+
+        return redirect()->route('customer.employees.index')->withToastSuccess('Employee updated successfully!!');
     }
 
     /**
@@ -77,8 +146,16 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Employee $employee) {
+        $image_path = public_path($employee->image);
+
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+
+        $employee->delete();
+
+        return redirect()->back()->withToastSuccess('Employee deleted successfully!!');
     }
+
 }

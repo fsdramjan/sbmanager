@@ -6,7 +6,8 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class SupplierController extends Controller {
+class SupplierController extends Controller 
+{
     /**
      * Display a listing of the resource.
      *
