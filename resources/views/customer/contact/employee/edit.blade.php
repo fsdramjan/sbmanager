@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" id="name"
-                                                value="{{ $employee->name }}" placeholder="Enter name" name="name">
+                                                value="{{ $employee->name }}" placeholder="Enter name" name="name" required>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label for="phone">Phone</label>
                                             <input type="text" class="form-control" id="phone"
-                                                value="{{ $employee->phone }}" name="phone">
+                                                value="{{ $employee->phone }}" name="phone" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -75,7 +75,7 @@
                                         <div class="form-group">
                                             <label for="designation">Designation</label>
                                             <input type="text" value="{{ $employee->designation }}" class="form-control" id="designation" placeholder="Enter designation"
-                                                name="designation">
+                                                name="designation" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -89,7 +89,7 @@
                                         <div class="form-group">
                                             <label for="salary">Salary</label>
                                             <input type="text" class="form-control" id="salary"
-                                                value="{{ $employee->salary }}" placeholder="Enter salary" name="salary">
+                                                value="{{ $employee->salary }}" placeholder="Enter salary" name="salary" required>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                             <label for="address">Address</label>
                                             <input type="text" class="form-control" id="address"
                                                 value="{{ $employee->address }}" placeholder="Enter address"
-                                                name="address">
+                                                name="address" required>
                                         </div>
                                     </div>
                                 </div>

@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" id="name"
-                                                value="{{ $supplier->name }}" placeholder="Enter name" name="name">
+                                                value="{{ $supplier->name }}" placeholder="Enter name" name="name" required>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label for="phone">Phone</label>
                                             <input type="text" class="form-control" id="phone"
-                                                value="{{ $supplier->phone }}" name="phone">
+                                                value="{{ $supplier->phone }}" name="phone" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -76,7 +76,7 @@
                                             <label for="supply_profuct">Supply product</label>
                                             <input type="text" class="form-control" id="supply_profuct"
                                                 value="{{ $supplier->supply_product }}" placeholder="Enter supply profuct"
-                                                name="supply_product">
+                                                name="supply_product" required>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                             <label for="address">Address</label>
                                             <input type="text" class="form-control" id="address"
                                                 value="{{ $supplier->address }}" placeholder="Enter address"
-                                                name="address">
+                                                name="address" required>
                                         </div>
                                     </div>
                                 </div>

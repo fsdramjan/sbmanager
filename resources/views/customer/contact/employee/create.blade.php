@@ -42,7 +42,7 @@
                                         <div class="form-group">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" id="name"
-                                                value="{{ old('name') }}" placeholder="Enter name" name="name">
+                                                value="{{ old('name') }}" placeholder="Enter name" name="name" required>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                         <div class="form-group">
                                             <label for="phone">Phone</label>
                                             <input type="text" value="{{ old('phone') }}" class="form-control" id="phone" placeholder="Enter phone"
-                                                name="phone">
+                                                name="phone" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label for="designation">Designation</label>
                                             <input type="text" value="{{ old('designation') }}" class="form-control" id="designation" placeholder="Enter designation"
-                                                name="designation">
+                                                name="designation" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <label for="salary">Salary</label>
                                             <input type="text" class="form-control" id="salary"
-                                                value="{{ old('salary') }}" placeholder="Enter salary" name="salary">
+                                                value="{{ old('salary') }}" placeholder="Enter salary" name="salary" required>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                         <div class="form-group">
                                             <label for="address">Address</label>
                                             <input type="text" class="form-control" id="address"
-                                                value="{{ old('address') }}" placeholder="Enter address" name="address">
+                                                value="{{ old('address') }}" placeholder="Enter address" name="address" required>
                                         </div>
                                     </div>
                                 </div>

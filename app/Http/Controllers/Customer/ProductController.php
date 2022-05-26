@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Consumer;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class ConsumerController extends Controller {
+class ProductController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $consumers = Consumer::where('shop_id', SID())->paginate(50);
+        $products = Product::where('shop_id',SID())->paginate(50);
 
-        return view('customer.contact.consumer.index', compact('consumers'));
+        return view('customer.product.index', compact('products'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ConsumerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('customer.contact.consumer.create');
+        return view('customer.product.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class ConsumerController extends Controller {
             if ($image_file) {
 
                 $img_gen   = hexdec(uniqid());
-                $image_url = 'images/consumer/';
+                $image_url = 'images/product/';
                 $image_ext = strtolower($image_file->getClientOriginalExtension());
 
                 $img_name    = $img_gen . '.' . $image_ext;
@@ -54,16 +54,15 @@ class ConsumerController extends Controller {
 
         }
 
-        Consumer::create([
-            'shop_id' => SID(),
-            'name'    => $request->name,
-            'phone'   => $request->phone,
-            'email'   => $request->email,
-            'image'   => $final_name1 ?? null,
-            'address' => $request->address,
+        Product::create([
+            'shop_id'  => SID(),
+            'name'     => $request->name,
+            'quantity' => $request->quantity,
+            'price'    => $request->price,
+            'image'    => $final_name1 ?? null,
         ]);
 
-        return redirect()->back()->withToastSuccess('Consumer added successfully!!');
+        return redirect()->back()->withToastSuccess('Product added successfully!!');
 
     }
 
@@ -83,8 +82,8 @@ class ConsumerController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Consumer $consumer) {
-        return view('customer.contact.consumer.edit', compact('consumer'));
+    public function edit(Product $product) {
+        return view('customer.product.edit', compact('product'));
     }
 
     /**
@@ -94,7 +93,7 @@ class ConsumerController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Consumer $consumer) {
+    public function update(Request $request, Product $product) {
 
         if ($request->hasFile('image')) {
 
@@ -102,21 +101,21 @@ class ConsumerController extends Controller {
 
             if ($image_file) {
 
-                $image_path = public_path($consumer->image);
+                $image_path = public_path($product->image);
 
                 if (File::exists($image_path)) {
                     File::delete($image_path);
                 }
 
                 $img_gen   = hexdec(uniqid());
-                $image_url = 'images/consumer/';
+                $image_url = 'images/product/';
                 $image_ext = strtolower($image_file->getClientOriginalExtension());
 
                 $img_name    = $img_gen . '.' . $image_ext;
                 $final_name1 = $image_url . $img_gen . '.' . $image_ext;
 
                 $image_file->move($image_url, $img_name);
-                $consumer->update(
+                $product->update(
                     [
                         'image' => $final_name1,
                     ]
@@ -125,14 +124,13 @@ class ConsumerController extends Controller {
 
         }
 
-        $consumer->update([
-            'name'    => $request->name,
-            'phone'   => $request->phone,
-            'email'   => $request->email,
-            'address' => $request->address,
+        $product->update([
+            'name'     => $request->name,
+            'quantity' => $request->quantity,
+            'price'    => $request->price,
         ]);
 
-        return redirect()->route('customer.consumers.index')->withToastSuccess('Consumer updated successfully!!');
+        return redirect()->route('customer.products.index')->withToastSuccess('Product updated successfully!!');
     }
 
     /**
@@ -141,16 +139,16 @@ class ConsumerController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Consumer $consumer) {
-        $image_path = public_path($consumer->image);
+    public function destroy(Product $product) {
+        $image_path = public_path($product->image);
 
         if (File::exists($image_path)) {
             File::delete($image_path);
         }
 
-        $consumer->delete();
+        $product->delete();
 
-        return redirect()->back()->withToastSuccess('Consumer deleted successfully!!');
+        return redirect()->back()->withToastSuccess('Product deleted successfully!!');
     }
 
 }

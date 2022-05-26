@@ -14,7 +14,7 @@ class EmployeeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $employees = Employee::paginate(50);
+        $employees = Employee::where('shop_id',SID())->paginate(50);
 
         return view('customer.contact.employee.index', compact('employees'));
     }
