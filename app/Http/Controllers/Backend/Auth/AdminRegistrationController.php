@@ -16,7 +16,7 @@ class AdminRegistrationController extends Controller {
         return view('backend.auth.admin-list', compact('admins'));
     }
 
-    public function austomerList() {
+    public function customerList() {
         $customers = User::all();
 
         return view('backend.auth.customer-list', compact('customers'));

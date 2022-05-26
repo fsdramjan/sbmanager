@@ -31,44 +31,44 @@
                     </a>
                 </li>
 
-                {{-- admin--}}
+                {{-- admin --}}
                 {{-- @if (auth()->guard('admin')->user()->admin_user == 1) --}}
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-circle text-warning"></i>
-                            <p class="text">
-                                Admin
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview nav-header">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.adminList') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Admin List</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.createAdmin') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Create New Admin</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.userList') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>User List</p>
-                                </a>
-                            </li>
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('admin.instructorList') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Instructor List</p>
-                                </a>
-                            </li> --}}
-                        </ul>
-                    </li>
-                {{-- @endif  --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-circle text-warning"></i>
+                        <p class="text">
+                            Admin
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview nav-header">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.adminList') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-danger"></i>
+                                <p>Admin List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.createAdmin') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-danger"></i>
+                                <p>Create New Admin</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.customerList') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-danger"></i>
+                                <p>Customer List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.userList') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-danger"></i>
+                                <p>User List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- @endif --}}
 
 
 
@@ -134,7 +134,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>  --}}
+                </li> --}}
 
                 {{-- Job activities
                 <li class="nav-item">
@@ -159,9 +159,7 @@
                         <i class="nav-icon far fa-circle text-danger"></i>
                         <p>Blog</p>
                     </a>
-                </li>
-
- --}}
+                </li> --}}
 
 
                 {{-- order
@@ -234,7 +232,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> 
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

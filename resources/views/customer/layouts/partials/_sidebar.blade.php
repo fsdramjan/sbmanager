@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.dashboard') }}" class="brand-link">
-        <img src="{{ asset($company->logo??'') }}" alt="admin" class="brand-image  elevation-3" style="opacity: .8">
+    <a href="{{ route('customer.dashboard') }}" class="brand-link">
+        <img src="{{ asset($company->logo ?? '') }}" alt="admin" class="brand-image  elevation-3" style="opacity: .8">
     </a>
 
     <!-- Sidebar -->
@@ -12,8 +12,7 @@
                 <img src="{{ asset(shop()->image) }}" class="img-circle elevation-2" alt="AI">
             </div>
             <div class="info">
-                <a href="{{ route('customer.dashboard') }}"
-                    class="d-block">{{ shop()->name }}</a>
+                <a href="{{ route('customer.dashboard') }}" class="d-block">{{ shop()->name }}</a>
             </div>
         </div>
 
@@ -23,15 +22,17 @@
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
+                    <form action="{{ route('customer.dashboard') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="shop_id" value="{{ SID() }}">
+                        <button type="submit" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+
+                            Dashboard</button>
+                    </form>
                 </li>
 
-                {{-- admin--}}
+                {{-- admin --}}
                 {{-- @if (auth()->guard('admin')->user()->admin_user == 1) 
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -68,7 +69,7 @@
                             </li>
                         </ul>
                     </li>
-                 @endif  --}}
+                 @endif --}}
 
 
 
@@ -103,8 +104,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
- --}}
+                </li> --}}
                 {{-- instructor activities
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -134,8 +134,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> 
- --}}
+                </li> --}}
                 {{-- Job activities
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -159,8 +158,7 @@
                         <i class="nav-icon far fa-circle text-danger"></i>
                         <p>Blog</p>
                     </a>
-                </li>
- --}}
+                </li> --}}
 
 
 
@@ -205,7 +203,7 @@
 
 
 
-                
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

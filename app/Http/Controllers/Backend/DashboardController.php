@@ -47,7 +47,7 @@ class DashboardController extends Controller {
     //contact
     public function showContact() {
         $data                   = [];
-        $data['contact_people'] = Contact::orderBy('id', 'DESC')->paginate(50);
+        $data['contact_people'] = Contact::orderBy('status', 'asc')->paginate(50);
 
         return view('backend.contact', $data);
     }

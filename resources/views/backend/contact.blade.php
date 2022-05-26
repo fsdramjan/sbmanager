@@ -75,6 +75,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{ $contact_people->links() }}
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->

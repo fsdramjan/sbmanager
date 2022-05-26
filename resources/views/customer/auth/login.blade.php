@@ -29,7 +29,7 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Login in to start your session</p>
+                <p class="login-box-msg"><b>Customer panel login session.</b></p>
 
                 <form action="{{ route('customer.login') }}" method="post">
                     @csrf

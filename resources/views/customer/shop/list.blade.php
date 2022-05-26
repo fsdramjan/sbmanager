@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shopkeeper Login Area - {{ config('app.name') }}</title>
+    <title>Your shops - {{ config('app.name') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
