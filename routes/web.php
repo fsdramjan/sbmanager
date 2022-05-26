@@ -15,6 +15,7 @@ use App\Http\Controllers\Customer\Auth\CustomerRegisterController;
 use App\Http\Controllers\Customer\Auth\CustomerResetPasswordController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\ShopController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +63,7 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
     });
 
     Route::resource('/consumers', ConsumerController::class);
+    Route::resource('/suppliers', SupplierController::class);
 });
 
 //backend

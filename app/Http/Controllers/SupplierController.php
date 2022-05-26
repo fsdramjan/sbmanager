@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
-class SupplierController extends Controller
-{
+class SupplierController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $suppliers = Supplier::paginate(50);
+
+        return view('customer.supplier.index', compact('suppliers'));
     }
 
     /**
@@ -21,9 +23,8 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('customer.supplier.create');
     }
 
     /**
@@ -32,9 +33,38 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+
+        if ($request->hasFile('image')) {
+
+            $image_file = $request->file('image');
+
+            if ($image_file) {
+
+                $img_gen   = hexdec(uniqid());
+                $image_url = 'images/supplier/';
+                $image_ext = strtolower($image_file->getClientOriginalExtension());
+
+                $img_name    = $img_gen . '.' . $image_ext;
+                $final_name1 = $image_url . $img_gen . '.' . $image_ext;
+
+                $image_file->move($image_url, $img_name);
+            }
+
+        }
+
+        Supplier::create([
+            'shop_id'        => SID(),
+            'name'           => $request->name,
+            'phone'          => $request->phone,
+            'email'          => $request->email,
+            'image'          => $final_name1 ?? null,
+            'supply_product' => $request->supply_product,
+            'address'        => $request->address,
+        ]);
+
+        return redirect()->route('customer.suppliers.index')->withToastSuccess('Supplier added successfully!!');
+
     }
 
     /**
@@ -43,8 +73,7 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -54,9 +83,8 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Supplier $supplier) {
+        return view('customer.supplier.edit', compact('supplier'));
     }
 
     /**
@@ -66,9 +94,46 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Supplier $supplier) {
+
+        if ($request->hasFile('image')) {
+
+            $image_file = $request->file('image');
+
+            if ($image_file) {
+
+                $image_path = public_path($supplier->image);
+
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+
+                $img_gen   = hexdec(uniqid());
+                $image_url = 'images/supplier/';
+                $image_ext = strtolower($image_file->getClientOriginalExtension());
+
+                $img_name    = $img_gen . '.' . $image_ext;
+                $final_name1 = $image_url . $img_gen . '.' . $image_ext;
+
+                $image_file->move($image_url, $img_name);
+                $supplier->update(
+                    [
+                        'image' => $final_name1,
+                    ]
+                );
+            }
+
+        }
+
+        $supplier->update([
+            'name'           => $request->name,
+            'phone'          => $request->phone,
+            'email'          => $request->email,
+            'address'        => $request->address,
+            'supply_product' => $request->supply_product,
+        ]);
+
+        return redirect()->route('customer.suppliers.index')->withToastSuccess('supplier updated successfully!!');
     }
 
     /**
@@ -77,8 +142,16 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Supplier $supplier) {
+        $image_path = public_path($supplier->image);
+
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+
+        $supplier->delete();
+
+        return redirect()->back()->withToastSuccess('supplier deleted successfully!!');
     }
+
 }
