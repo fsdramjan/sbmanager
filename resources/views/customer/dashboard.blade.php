@@ -24,24 +24,11 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="fas fa-chalkboard-teacher"></i></span>
+                        <span class="info-box-icon bg-info"><i class="fas fa-notes-medical"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Approved Instructor</span>
-                            <span class="info-box-number">{{ 0 }}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="fas fa-user-alt-slash"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Disapproved Instructor</span>
-                            <span class="info-box-number">{{ 0 }}</span>
+                            <span class="info-box-text">Today's Sale</span>
+                            <span class="info-box-number">৳ {{ 0 }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -53,8 +40,8 @@
                         <span class="info-box-icon bg-info"><i class="fas fa-notes-medical"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Active Courses</span>
-                            <span class="info-box-number">{{ 0 }}</span>
+                            <span class="info-box-text">Today's Expenses</span>
+                            <span class="info-box-number">৳ {{ 0 }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -66,8 +53,21 @@
                         <span class="info-box-icon bg-info"><i class="fas fa-notes-medical"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Inactive Courses</span>
-                            <span class="info-box-number">{{ 0 }}</span>
+                            <span class="info-box-text">Today's Due</span>
+                            <span class="info-box-number">৳ {{ 0 }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-notes-medical"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Today's Balance</span>
+                            <span class="info-box-number">৳ {{ 0 }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

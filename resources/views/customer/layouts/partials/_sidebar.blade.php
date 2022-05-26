@@ -33,43 +33,35 @@
                 </li>
 
                 {{-- admin --}}
-                {{-- @if (auth()->guard('admin')->user()->admin_user == 1) 
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-circle text-warning"></i>
-                            <p class="text">
-                                Admin
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview nav-header">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.adminList') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Admin List</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.createAdmin') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Create New Admin</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.customerList') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Customer List</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.instructorList') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>Instructor List</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                 @endif --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-circle text-warning"></i>
+                        <p class="text">
+                            Tally
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview nav-header">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">
+                                    Contact
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview nav-header">
+                                <li class="nav-item">
+                                    <a href="{{ route('customer.consumers.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-danger"></i>
+                                        <p>Consumer</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
 
 
 

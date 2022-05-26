@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\Auth\BackendManagementController;
 use App\Http\Controllers\Backend\CompanyInfoController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\Customer\Auth\CustomerForgotPasswordController;
 use App\Http\Controllers\Customer\Auth\CustomerLoginController;
 use App\Http\Controllers\Customer\Auth\CustomerRegisterController;
@@ -59,6 +60,8 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
         Route::get('/list', 'list')->name('list');
         Route::post('/store', 'store')->name('store');
     });
+
+    Route::resource('/consumers', ConsumerController::class);
 });
 
 //backend
