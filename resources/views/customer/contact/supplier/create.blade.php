@@ -1,5 +1,5 @@
 @extends('customer.layouts.master')
-@section('title', 'Create new consumer')
+@section('title', 'Create new supplier')
 
 @section('backend')
     <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Create New Consumer</h1>
+                    <h1>Create New Supplier</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('customer.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Create Consumer</li>
+                        <li class="breadcrumb-item active">Create Supplier</li>
                     </ol>
                 </div>
             </div>
@@ -27,13 +27,13 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ route('customer.consumers.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('customer.suppliers.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="icon">Image</label>
+                                            <label for="icon">Image(optional)</label>
                                             <input type="file" class="form-control" id="icon" placeholder="Enter image"
                                                 name="image">
                                         </div>
@@ -57,9 +57,20 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
+                                            <label for="email">Email(optional)</label>
                                             <input type="text" class="form-control" id="email"
                                                 value="{{ old('email') }}" placeholder="Enter email" name="email">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="supply_product">Supply product</label>
+                                            <input type="text" class="form-control" id="supply_product"
+                                                value="{{ old('supply_product') }}" placeholder="Enter supply product" name="supply_product">
                                         </div>
                                     </div>
                                 </div>

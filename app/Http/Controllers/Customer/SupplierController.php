@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class SupplierController extends Controller 
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class SupplierController extends Controller
     public function index() {
         $suppliers = Supplier::paginate(50);
 
-        return view('customer.supplier.index', compact('suppliers'));
+        return view('customer.contact.supplier.index', compact('suppliers'));
     }
 
     /**
@@ -25,7 +26,7 @@ class SupplierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('customer.supplier.create');
+        return view('customer.contact.supplier.create');
     }
 
     /**
@@ -85,7 +86,7 @@ class SupplierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Supplier $supplier) {
-        return view('customer.supplier.edit', compact('supplier'));
+        return view('customer.contact.supplier.edit', compact('supplier'));
     }
 
     /**

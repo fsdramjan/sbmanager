@@ -37,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="icon">Image</label>
+                                            <label for="icon">Image(optional)</label>
                                             <input type="file" class="form-control" id="icon" placeholder="Enter image"
                                                 name="image">
                                         </div>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
+                                            <label for="email">Email(optional)</label>
                                             <input type="text" class="form-control" id="email"
                                                 value="{{ $employee->email }}" placeholder="Enter email" name="email">
                                         </div>
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="employee_id">Employee ID</label>
+                                            <label for="employee_id">Employee ID(optional)</label>
                                             <input type="text" class="form-control" id="employee_id"
                                                 value="{{ $employee->employee_id }}" placeholder="Enter employee_id" name="employee_id">
                                         </div>

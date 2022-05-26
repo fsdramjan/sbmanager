@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
 use App\Models\Consumer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -15,7 +16,7 @@ class ConsumerController extends Controller {
     public function index() {
         $consumers = Consumer::paginate(50);
 
-        return view('customer.consumer.index', compact('consumers'));
+        return view('customer.contact.consumer.index', compact('consumers'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ConsumerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('customer.consumer.create');
+        return view('customer.contact.consumer.create');
     }
 
     /**
@@ -83,7 +84,7 @@ class ConsumerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Consumer $consumer) {
-        return view('customer.consumer.edit', compact('consumer'));
+        return view('customer.contact.consumer.edit', compact('consumer'));
     }
 
     /**
