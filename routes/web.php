@@ -13,6 +13,7 @@ use App\Http\Controllers\Customer\Auth\CustomerForgotPasswordController;
 use App\Http\Controllers\Customer\Auth\CustomerLoginController;
 use App\Http\Controllers\Customer\Auth\CustomerRegisterController;
 use App\Http\Controllers\Customer\Auth\CustomerResetPasswordController;
+use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\ProductController;
 use App\Http\Controllers\Customer\ShopController;
@@ -68,6 +69,19 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
     Route::resource('/suppliers', SupplierController::class);
     Route::resource('/employees', EmployeeController::class);
     Route::resource('/products', ProductController::class);
+
+    Route::controller(CartController::class)->group(function () {
+        //cart
+        Route::post('/add-to-cart', 'addToCart');
+        // Route::get('/cart', 'cart')->name('cart');
+        // Route::post('/update-cart', 'updateCart')->name('updateCart');
+        // Route::get('/remove-from-cart/{rowId}', 'removeFromCart')->name('removeFromCart');
+        // Route::get('/destroy-cart', 'destroyCart')->name('destroyCart');
+    
+        // //coupon
+        // Route::post('/apply-coupon', 'applyCoupon')->name('applyCoupon');
+        // Route::get('/remove-coupon', 'removeCoupon')->name('removeCoupon');
+    });
 });
 
 //backend
@@ -128,3 +142,5 @@ Route::prefix('/admin')->as('admin.')->middleware('auth:admin')->group(function 
         Route::post('/inactive-pages/{page}', 'pageInactive')->name('pageInactive');
     });
 });
+
+Route::get('/cc',[CartController::class,'cc']);

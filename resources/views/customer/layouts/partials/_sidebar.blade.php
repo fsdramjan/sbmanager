@@ -46,6 +46,23 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p class="text">
+                                    Sell
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview nav-header">
+                                <li class="nav-item">
+                                    <a href="{{ route('customer.products.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-danger"></i>
+                                        <p>Product List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">
                                     Contact
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
@@ -69,17 +86,12 @@
                                         <p>Employee</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('customer.products.index') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p>Product</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
 
+                
 
 
                 {{-- category

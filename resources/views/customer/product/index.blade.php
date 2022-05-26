@@ -32,7 +32,7 @@
                             </a>
                             <br>
                             <br>
-                            <table id="" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Action</th>
@@ -65,6 +65,10 @@
                                             <td>{{ $product->name }}</td>
                                             <td>{{ $product->quantity }}</td>
                                             <td>{{ $product->price }}</td>
+                                            <td>
+                                                <a href="javascript:;" onclick="add_to_cart({{ $product->id }})"
+                                                    class="btn btn-success btn-sm">Add to Cart</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -82,4 +86,63 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+@endsection
+@section('jsScript')
+    <script>
+        function add_to_cart(product_id) {
+
+            $(document).ready(function(e) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    method: 'POST',
+
+                    url: "{{ asset('/') }}customer/add-to-cart",
+                    data: {
+                        id: product_id,
+                    },
+                    cache: false,
+                    success: function(response) {
+                        //  window.location.reload();
+                        if (response.status === 'success') {
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Product added to cart successfully'
+                            })
+
+
+                            $('.total_cart_items').html(response.cart_count);
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Product out of stock'
+                            })
+                        }
+
+                    },
+                    async: false,
+                    error: function(error) {
+
+                    }
+                })
+            })
+
+        }
+    </script>
 @endsection
