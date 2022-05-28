@@ -73,9 +73,10 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
     Route::controller(CartController::class)->group(function () {
         //cart
         Route::post('/add-to-cart', 'addToCart');
-        // Route::get('/cart', 'cart')->name('cart');
-        // Route::post('/update-cart', 'updateCart')->name('updateCart');
-        // Route::get('/remove-from-cart/{rowId}', 'removeFromCart')->name('removeFromCart');
+        Route::post('/add-to-cart/discount', 'extraDiscount');
+        Route::get('/cart', 'cart')->name('cart');
+        Route::post('/update-cart', 'updateCart')->name('updateCart');
+        Route::get('/remove-from-cart/{rowId}', 'removeFromCart')->name('removeFromCart');
         // Route::get('/destroy-cart', 'destroyCart')->name('destroyCart');
     
         // //coupon

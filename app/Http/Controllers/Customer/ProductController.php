@@ -14,7 +14,7 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $products = Product::where('shop_id',SID())->paginate(50);
+        $products = Product::where('shop_id',SID())->get();
 
         return view('customer.product.index', compact('products'));
     }
@@ -56,7 +56,7 @@ class ProductController extends Controller {
 
         Product::create([
             'shop_id'  => SID(),
-            'name'     => $request->name,
+            'name'     => $request->name.rand(),
             'quantity' => $request->quantity,
             'price'    => $request->price,
             'image'    => $final_name1 ?? null,

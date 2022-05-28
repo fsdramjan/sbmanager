@@ -26,12 +26,11 @@
                 <div class="col-12">
                     <div class="card">
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <a href="{{ route('customer.products.create') }}" class="btn btn-outline-primary">Add
-                                Product
-                            </a>
-                            <br>
-                            <br>
+                        <a href="{{ route('customer.products.create') }}" class="btn btn-outline-primary">Add
+                            Product
+                        </a>
+                        <div class="card-body table-responsive" style="height: 500px;">
+
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -40,6 +39,7 @@
                                         <th>Name</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th>Sell Now</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,8 +73,28 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{-- {{ $products->links() }} --}}
                         </div>
-                        {{ $products->links() }}
+                        <tfoot>
+                            <tr>
+                                <a href="{{ route('customer.cart') }}" class="btn btn-info btn-sm">
+                                    <h6 style="width: 50%;text-align:left;float:left;">Total Sale</h6>
+                                    <div class="d-flex justify-content-start mr-3"
+                                        style="width: 10%;text-align:left;float:left;">
+                                        <p>৳</p>
+                                        <p class="total_cart_subtotal">
+                                            {{ Cart::subtotal() }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-start bg-white"
+                                        style="width: 5%;float:left;">
+                                        <p class="total_cart_items" 
+                                        style="text-align:center;">
+                                            {{ Cart::count() }}</p>
+                                        <p>></p>
+                                    </div>
+                                </a>
+                            </tr>
+                        </tfoot>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
@@ -134,6 +154,8 @@
                                 title: 'Product out of stock'
                             })
                         }
+                        $('.total_cart_items').html(response.cart_count);
+                        $('.total_cart_subtotal').html(response.cart_subtotal);
 
                     },
                     async: false,
