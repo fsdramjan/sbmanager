@@ -31,7 +31,7 @@ class CartController extends Controller {
         $data    = [];
         $product = Product::where('id', $request->id)->first();
 
-        if (!$product) {
+        if (!$product || $product->quantity === 0) {
             return response()->json([
                 'status' => 'noSuccess',
             ]);

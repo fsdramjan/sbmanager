@@ -8,16 +8,18 @@ use App\Http\Controllers\Backend\Auth\BackendManagementController;
 use App\Http\Controllers\Backend\CompanyInfoController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PageController;
-use App\Http\Controllers\Customer\ConsumerController;
 use App\Http\Controllers\Customer\Auth\CustomerForgotPasswordController;
 use App\Http\Controllers\Customer\Auth\CustomerLoginController;
 use App\Http\Controllers\Customer\Auth\CustomerRegisterController;
 use App\Http\Controllers\Customer\Auth\CustomerResetPasswordController;
 use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\CheckoutController;
+use App\Http\Controllers\Customer\ConsumerController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Customer\EmployeeController;
+use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProductController;
 use App\Http\Controllers\Customer\ShopController;
-use App\Http\Controllers\Customer\EmployeeController;
 use App\Http\Controllers\Customer\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,11 +79,13 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
         Route::get('/cart', 'cart')->name('cart');
         Route::post('/update-cart', 'updateCart')->name('updateCart');
         Route::get('/remove-from-cart/{rowId}', 'removeFromCart')->name('removeFromCart');
-        // Route::get('/destroy-cart', 'destroyCart')->name('destroyCart');
-    
-        // //coupon
-        // Route::post('/apply-coupon', 'applyCoupon')->name('applyCoupon');
-        // Route::get('/remove-coupon', 'removeCoupon')->name('removeCoupon');
+    });
+
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('/checkout', 'checkout')->name('checkout');
+    });
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('/placeOrder', 'placeOrder')->name('placeOrder');
     });
 });
 
@@ -144,4 +148,4 @@ Route::prefix('/admin')->as('admin.')->middleware('auth:admin')->group(function 
     });
 });
 
-Route::get('/cc',[CartController::class,'cc']);
+Route::get('/cc', [CartController::class, 'cc']);

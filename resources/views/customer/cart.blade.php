@@ -119,6 +119,16 @@
                                         <th style="border-top: 3px solid whitesmoke">৳<span
                                                 id="subtotal">{{ $subtotal }}</span>/=</th>
                                     </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>
+                                            <a href="{{ route('customer.checkout') }}" class="btn btn-primary btn-sm btn-block">Proceed to Checkout</span></a>
+                                        </th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
