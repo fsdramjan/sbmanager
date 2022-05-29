@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller {
     public function placeOrder(Request $request) {
 
-        if ($request->cash === null && $request->payment_method || ($request->cash - $request->subtotal) < 0) {
+        if ($request->cash === null && $request->payment_method === 'Cash' && ($request->cash - $request->subtotal) < 0 ) {
             return redirect()->back()->withToastError('Cash payment input error.');
         }
 
@@ -53,6 +53,7 @@ class OrderController extends Controller {
 
         session()->forget('discount');
         session()->forget('subtotal');
+        Cart::destroy();
 
         return redirect()->route('customer.products.index')->withToastSuccess('Order placed successfully!!');
     }
