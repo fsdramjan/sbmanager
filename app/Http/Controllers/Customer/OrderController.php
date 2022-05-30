@@ -12,11 +12,15 @@ use Illuminate\Http\Request;
 class OrderController extends Controller {
     public function placeOrder(Request $request) {
 
-        if ($request->cash === null && $request->payment_method === 'Cash' && ($request->cash - $request->subtotal) < 0 ) {
+        if ($request->cash === null && $request->payment_method === 'Cash' && ($request->cash - $request->subtotal) < 0) {
             return redirect()->back()->withToastError('Cash payment input error.');
         }
 
-        if($request->payment_method === 'Cash'){
+        if ($request->payment_method === 'Digital Payment' && $request->consumer_id === null) {
+            return redirect()->back()->withToastError('Customer information is needed for digital payment');
+        }
+
+        if ($request->payment_method === 'Cash') {
             $cash = $request->subtotal;
         } else {
             $cash = 0;
@@ -34,6 +38,11 @@ class OrderController extends Controller {
 
         $order = Order::create($data);
 
+        if ($request->payment_method === 'Digital Payment') {
+            $order->payment_link = 'routename/'.$order->id;
+            $order->save();
+        }
+
         foreach (Cart::content() as $cart) {
             $order_product              = new OrderProduct();
             $order_product->shop_id     = SID();
@@ -44,7 +53,7 @@ class OrderController extends Controller {
             $order_product->price       = $cart->price;
             $order_product->save();
 
-            $product = Product::find($cart->id);
+            $product          = Product::find($cart->id);
             $updated_quantity = $product->quantity - $cart->qty;
             $product->update([
                 'quantity' => $updated_quantity <= 0 ? 0 : $updated_quantity,

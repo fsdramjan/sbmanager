@@ -19,6 +19,7 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\EmployeeController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProductController;
+use App\Http\Controllers\Customer\QuickSellController;
 use App\Http\Controllers\Customer\ShopController;
 use App\Http\Controllers\Customer\SupplierController;
 use App\Http\Controllers\Customer\TransactionController;
@@ -87,6 +88,13 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
 
             return redirect()->route('customer.cart');
         });
+    });
+
+    Route::controller(QuickSellController::class)->prefix('/quicksell')->group(function () {
+        Route::get('/', 'quicksell')->name('quicksell');
+        Route::post('/store', 'storeQuicksell')->name('storeQuicksell');
+        Route::get('/edit/{order_id}', 'editQuicksell')->name('editQuicksell');
+        Route::post('/update/{order_id}', 'updateQuicksell')->name('updateQuicksell');
     });
 
     Route::controller(CheckoutController::class)->group(function () {

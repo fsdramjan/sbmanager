@@ -28,6 +28,8 @@ class Order extends Model {
             return 'danger';
         } elseif ($this->payment_method === 'Personal Payment') {
             return 'info';
+        } elseif ($this->payment_method === 'Quick Sell') {
+            return 'warning';
         }
 
     }

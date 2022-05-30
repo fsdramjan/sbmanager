@@ -61,17 +61,20 @@
                                                 {{ number_format($order->subtotal, 2) }}</td>
                                             <td class="text-center" style="vertical-align: middle;">
                                                 <button class="btn btn-{{ $order->button_color }} btn-xs"
-                                                    style="width: 100%;
-                                                                        letter-spacing: 2px;">{{ $order->payment_method }}</button>
-                                                <br>
-                                                <span>
-                                                    @php
-                                                        $count = 0;
-                                                        foreach($order->orderProduct as $pp){
-                                                            $count += $pp->quantity;
-                                                        }
-                                                    @endphp
-                                                    {{ $count }} Items</span>
+                                                    style="width: 100%;letter-spacing: 2px;"
+                                                    @if ($order->payment_method === 'Digital Payment' && $order->payment_link !== null) data-toggle="modal" data-target="#exampleModal{{ $order->id }}" @endif>
+                                                    {{ $order->payment_method }} </button>
+                                                @if ($order->payment_method !== 'Quick Sell')
+                                                    <br>
+                                                    <span>
+                                                        @php
+                                                            $count = 0;
+                                                            foreach ($order->orderProduct as $pp) {
+                                                                $count += $pp->quantity;
+                                                            }
+                                                        @endphp
+                                                        {{ $count }} Items</span>
+                                                @endif
                                             </td>
                                             <td style="vertical-align: middle;text-align:center;">
                                                 <a href="{{ route('customer.transactionDetails', $order->id) }}"
@@ -95,5 +98,28 @@
         </div>
         <!-- /.container-fluid -->
     </section>
+
+    @foreach ($orders as $order)
+        @if ($order->payment_link !== null)
+            <div class="modal fade" id="exampleModal{{ $order->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ $order->payment_link }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endforeach
 
 @endsection

@@ -20,11 +20,10 @@ class TransactionController extends Controller {
     }
 
     public function transactionDetails($id) {
-
         $data                = [];
         $data['transaction'] = $t = Order::where('id', $id)->with('orderProduct')->first();
-
-        if (CID() || SID() !== $t->shop_id) {
+        
+        if (!$t || SID() !== $t->shop_id) {
             return redirect()->back()->withToastError('Unauthorized access!!');
         }
 

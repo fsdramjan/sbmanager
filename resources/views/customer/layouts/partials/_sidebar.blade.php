@@ -65,6 +65,12 @@
                                         <p>Product List</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('customer.quicksell') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-danger"></i>
+                                        <p>Quick Sell</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

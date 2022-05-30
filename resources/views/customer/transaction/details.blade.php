@@ -69,8 +69,15 @@
                     <h3>Shopping Cart</h3>
                 </div>
                 <div style="width: 50%;float: left;text-align:right">
-                    <a href="{{ route('customer.cartOrder',$transaction->id) }}" class="btn btn-primary mb-2 text-right">Edit shopping cart
-                    </a>
+                    @if ($transaction->payment_method !== 'Quick Sell')
+                        <a href="{{ route('customer.cartOrder', $transaction->id) }}"
+                            class="btn btn-primary mb-2 text-right">Edit shopping cart
+                        </a>
+                    @else
+                        <a href="{{ route('customer.editQuicksell', $transaction->id) }}"
+                            class="btn btn-primary mb-2 text-right">Edit shopping cart
+                        </a>
+                    @endif
                 </div>
                 <div class="col-12">
                     <div class="card">
