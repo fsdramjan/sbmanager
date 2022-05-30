@@ -32,7 +32,7 @@
                             </h2>
                             <br>
                             <h2>
-                                <b>৳ {{ number_format($total_transaction,2) }}</b>
+                                <b>৳ {{ number_format($total_transaction, 2) }}</b>
                             </h2>
                         </div>
                         <div class="card-body">
@@ -42,6 +42,7 @@
                                         <th>Consumer Information</th>
                                         <th>Price</th>
                                         <th>Payment Method</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,12 +57,20 @@
                                                 @endif
                                                 <span>{{ $order->created_at }}</span>
                                             </td>
-                                            <td style="vertical-align: middle;">৳ {{ number_format($order->subtotal,2) }}</td>
+                                            <td style="vertical-align: middle;">৳
+                                                {{ number_format($order->subtotal, 2) }}</td>
                                             <td class="text-center" style="vertical-align: middle;">
-                                                <button class="btn btn-{{ $order->button_color }} btn-xs" style="width: 100%;
-                                                    letter-spacing: 2px;">{{ $order->payment_method }}</button>
+                                                <button class="btn btn-{{ $order->button_color }} btn-xs"
+                                                    style="width: 100%;
+                                                                        letter-spacing: 2px;">{{ $order->payment_method }}</button>
                                                 <br>
                                                 <span>{{ $order->orderProduct->count() }} Items</span>
+                                            </td>
+                                            <td style="vertical-align: middle;text-align:center;">
+                                                <a href="{{ route('customer.transactionDetails', $order->id) }}"
+                                                    class="btn btn-dark">
+                                                    VIEW DETAILS
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

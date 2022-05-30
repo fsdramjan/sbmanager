@@ -15,7 +15,7 @@ class Order extends Model {
     }
 
     public function orderProduct() {
-        return $this->hasMany(OrderProduct::class, 'order_id', 'id');
+        return $this->hasMany(OrderProduct::class);
     }
 
     public function getButtonColorAttribute() {

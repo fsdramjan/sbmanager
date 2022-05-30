@@ -90,6 +90,7 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
     });
     Route::controller(TransactionController::class)->prefix('transaction')->group(function () {
         Route::get('/', 'transaction')->name('transaction');
+        Route::get('/details/{id}', 'transactionDetails')->name('transactionDetails');
     });
 });
 

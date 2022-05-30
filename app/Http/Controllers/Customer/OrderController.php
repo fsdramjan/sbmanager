@@ -18,7 +18,7 @@ class OrderController extends Controller {
 
         if($request->payment_method === 'Cash'){
             $cash = $request->subtotal;
-        } elseif ($request->payment_method === 'Due'){
+        } else {
             $cash = 0;
         }
 
