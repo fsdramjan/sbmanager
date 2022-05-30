@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller {
     public function cart() {
-        $data             = [];
+        $data = [];
+
         $data['cart']     = Cart::content();
         $data['total']    = Cart::subtotal();
         $data['discount'] = session()->get('discount') ?? null;
@@ -27,8 +29,45 @@ class CartController extends Controller {
         return view('customer.cart', $data);
     }
 
+    public function cartOrder($id) {
+
+        session()->forget('discount');
+        session()->forget('subtotal');
+        session()->forget('order');
+        Cart::destroy();
+
+        $data = [];
+
+        $t = Order::where('id', $id)->with('orderProduct')->first();
+
+        if (CID() && SID() !== $t->shop_id) {
+            return redirect()->back()->withToastError('Unauthorized access!!');
+        }
+
+        foreach ($t->orderProduct as $op) {
+            $data['id']               = $op->product_id;
+            $data['name']             = GET_PRODUCT_BY_ID($op->product_id)->name;
+            $data['qty']              = $op->quantity;
+            $data['price']            = GET_PRODUCT_BY_ID($op->product_id)->price;
+            $data['weight']           = 1;
+            $data['options']['image'] = GET_PRODUCT_BY_ID($op->product_id)->image;
+            $data['options']['order'] = $id;
+
+            Cart::add($data);
+        }
+
+        session([
+            'discount' => $t->discount,
+            'subtotal' => $t->subtotal,
+            'order'    => $id,
+        ]);
+
+        return redirect()->route('customer.cart');
+    }
+
     public function addToCart(Request $request) {
-        $data    = [];
+        $data = [];
+
         $product = Product::where('id', $request->id)->first();
 
         if (!$product || $product->quantity === 0) {

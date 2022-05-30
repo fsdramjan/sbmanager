@@ -64,7 +64,14 @@
                                                     style="width: 100%;
                                                                         letter-spacing: 2px;">{{ $order->payment_method }}</button>
                                                 <br>
-                                                <span>{{ $order->orderProduct->count() }} Items</span>
+                                                <span>
+                                                    @php
+                                                        $count = 0;
+                                                        foreach($order->orderProduct as $pp){
+                                                            $count += $pp->quantity;
+                                                        }
+                                                    @endphp
+                                                    {{ $count }} Items</span>
                                             </td>
                                             <td style="vertical-align: middle;text-align:center;">
                                                 <a href="{{ route('customer.transactionDetails', $order->id) }}"

@@ -22,6 +22,7 @@ use App\Http\Controllers\Customer\ProductController;
 use App\Http\Controllers\Customer\ShopController;
 use App\Http\Controllers\Customer\SupplierController;
 use App\Http\Controllers\Customer\TransactionController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return dd(session()->get('order'));
 })->name('home');
 
 Route::get('/dashboard', function () {
@@ -78,8 +79,14 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
         Route::post('/add-to-cart', 'addToCart');
         Route::post('/add-to-cart/discount', 'extraDiscount');
         Route::get('/cart', 'cart')->name('cart');
+        Route::get('/cart/{order_id}', 'cartOrder')->name('cartOrder');
         Route::post('/update-cart', 'updateCart')->name('updateCart');
         Route::get('/remove-from-cart/{rowId}', 'removeFromCart')->name('removeFromCart');
+        Route::get('destroy', function () {
+            Cart::destroy();
+
+            return redirect()->route('customer.cart');
+        });
     });
 
     Route::controller(CheckoutController::class)->group(function () {

@@ -69,8 +69,7 @@
                     <h3>Shopping Cart</h3>
                 </div>
                 <div style="width: 50%;float: left;text-align:right">
-                    <a href="{{ route('customer.products.index') }}" class="btn btn-primary mb-2 text-right">Add
-                        Product to shopping cart
+                    <a href="{{ route('customer.cartOrder',$transaction->id) }}" class="btn btn-primary mb-2 text-right">Edit shopping cart
                     </a>
                 </div>
                 <div class="col-12">
