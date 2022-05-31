@@ -69,8 +69,8 @@
                                     </h4>
                                 </div>
                                 <div style="width: 30%;float:left;">
-                                    ৳<input type="number" placeholder="0" id="change" name="change" style="width: 20%;border:none"
-                                        disabled>
+                                    ৳<input type="number" placeholder="0" id="change" name="change"
+                                        style="width: 20%;border:none" disabled>
                                 </div>
                             </div>
                         </div>
@@ -230,6 +230,7 @@
     <script>
         $(document).ready(function() {
             $("#cash").keyup(function() {
+                alert($("#employee").is(":checked"))
                 var subtotal = +$("#subtotal").val();
                 var cash = +$("#cash").val();
                 var change = cash - subtotal;
@@ -239,23 +240,23 @@
         });
     </script>
     <script>
-        $('.consumer_body').show();
-        $('.employee_body').show();
+        $('.consumer_body').hide();
+        $('.employee_body').hide();
 
-        function consumer() {
+        $("#consumer").click(function() {
             if ($("#consumer").is(":checked")) {
                 $('.consumer_body').show();
             } else {
                 $('.consumer_body').hide();
             }
-        }
+        });
 
-        function employee() {
+        $("#employee").click(function() {
             if ($("#employee").is(":checked")) {
                 $('.employee_body').show();
             } else {
                 $('.employee_body').hide();
             }
-        }
+        });
     </script>
 @endsection
