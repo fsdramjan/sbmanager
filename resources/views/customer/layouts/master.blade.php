@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="{{ asset('backend/css/adminlte.min.css') }}">
 
     @yield('cssStyle')
+    <style>
+        .apply-border{
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">

@@ -7,13 +7,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Product List</h1>
+                    <a href="{{ route('customer.quicksell') }}"
+                        class="@if (Illuminate\Support\Facades\Route::is('customer.quicksell')) btn btn-info btn-sm @else btn btn-light btn-sm apply-border @endif" style="padding: 2px 35px;font-size:20px;"><img src="{{ asset('images/sell.png') }}" style="height:27px;padding:0 10px 0 0"> Quick Sell</a>
+
+                    <a href="{{ route('customer.products.index') }}"
+                        class="@if (Illuminate\Support\Facades\Route::is('customer.products.index')) btn btn-info btn-sm @else btn btn-light btn-sm apply-border @endif" style="padding: 2px 35px;font-size:20px;"><img src="{{ asset('images/product-list-icon.png') }}" style="height:27px;padding:0 10px 0 0"> Product List</a>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('customer.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Product</li>
-                    </ol>
+                    
                 </div>
             </div>
         </div><!-- /.container-fluid -->

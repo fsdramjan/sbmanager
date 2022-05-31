@@ -32,12 +32,7 @@
                     </form>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('customer.transaction') }}" class="nav-link">
-                        <i class="nav-icon far fa-circle text-warning"></i>
-                        <p>Transaction</p>
-                    </a>
-                </li>
+                
 
                 {{-- admin --}}
                 <li class="nav-item">
@@ -51,57 +46,24 @@
                     
                     <ul class="nav nav-treeview nav-header">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p class="text">
-                                    Sell
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                            <a href="{{ route('customer.transaction') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-warning"></i>
+                                <p>Transaction</p>
                             </a>
-                            <ul class="nav nav-treeview nav-header">
-                                <li class="nav-item">
-                                    <a href="{{ route('customer.products.index') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p>Product List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('customer.quicksell') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p>Quick Sell</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p class="text">
-                                    Contact
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                            <a href="{{ route('customer.quicksell') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-warning"></i>
+                                <p>Sell</p>
                             </a>
-                            <ul class="nav nav-treeview nav-header">
-                                <li class="nav-item">
-                                    <a href="{{ route('customer.consumers.index') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p>Consumer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('customer.suppliers.index') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p>Supplier</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('customer.employees.index') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p>Employee</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('customer.consumers.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-warning"></i>
+                                <p>Contact</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
