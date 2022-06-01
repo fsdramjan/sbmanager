@@ -16,6 +16,7 @@ use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ConsumerController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Customer\DueController;
 use App\Http\Controllers\Customer\EmployeeController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProductController;
@@ -107,6 +108,12 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
         Route::get('/', 'transaction')->name('transaction');
         Route::get('/details/{id}', 'transactionDetails')->name('transactionDetails');
     });
+
+    Route::controller(DueController::class)->prefix('/due')->as('due.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+    });
 });
 
 //backend
@@ -169,3 +176,4 @@ Route::prefix('/admin')->as('admin.')->middleware('auth:admin')->group(function 
 });
 
 Route::get('/cc', [CartController::class, 'cc']);
+Route::get('/get-category/{category}', [DueController::class, 'category']);

@@ -58,6 +58,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('customer.due.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-warning"></i>
+                                <p>Due Book</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('customer.consumers.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-warning"></i>
                                 <p>Contact</p>
