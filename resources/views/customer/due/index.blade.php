@@ -12,7 +12,7 @@
                     <h1>Due Book</h1>
                 </div>
                 <div class="col-sm-6">
-                    
+
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -23,15 +23,33 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header bg-success" style="height: 10%;vertical-align: middle;text-align:center;">
+                        <div class="card-header bg-success d-flex justify-content-between"
+                            style="height: 10%;vertical-align: middle;text-align:center;">
                             <h2>
                                 <b>Total Due</b>
+                                <br>
+                                <span>৳ {{ number_format($total_due, 2) }}</span>
                             </h2>
-                            <br>
                             <h2>
-                                <b>৳ {{ 'number_format($total_transaction, 2)' }}</b>
+                                <b>Total Deposit</b>
+                                <br>
+                                <span>৳ {{ number_format($total_deposit, 2) }}</span>
                             </h2>
                         </div>
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h5>Consumer({{ $consumer }})/Supplier({{ $supplier }})/Employee({{ $employee }})
+                                        </h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="{{ route('customer.due.create') }}" class="btn btn-primary btn-lg">Create
+                                            New Due Book</a>
+                                    </div>
+                                </div>
+                            </div><!-- /.container-fluid -->
+                        </section>
                         <div class="card-body">
                             <table id="" class="table table-bordered table-striped">
                                 <thead>
@@ -44,31 +62,29 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($dues as $due)
-                                        <tr>
-                                            <td style="vertical-align: middle;">
-                                                <span>#{{ $due->id }}</span>
-                                                <br>
-                                                {{-- @if ($due->consumer_id !== null)
-                                                    <b>{{ GET_CONSUMER_BY_ID($due->consumer_id)->name }}</b>
+                                        @if ($due->dueDetails->count() > 0)
+                                            <tr>
+                                                <td style="vertical-align: middle;">
+                                                    <span>#{{ $due->id }}</span>
                                                     <br>
-                                                @endif --}}
-                                                <b>{{ $due->due_to_name }}</b>
-                                                <span>{{ $due->created_at }}</span>
+                                                    <b>{{ $due->due_to_name }}</b>
+                                                    <br>
+                                                    <span>{{ $due->created_at }}</span>
 
-                                            </td>
-                                            <td style="vertical-align: middle;">৳
-                                                {{ 'number_format($due->subtotal, 2)'.$due->due_to }}</td>
-                                            <td class="text-center" style="vertical-align: middle;">
-                                                pp
-                                            </td>
-                                            <td style="vertical-align: middle;text-align:center;">
-                                                {{-- <a href="{{ route('customer.transactionDetails', $due->id) }}"
-                                                    class="btn btn-dark">
-                                                    VIEW DETAILS
-                                                </a> --}}
-                                                pp
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td style="vertical-align: middle;">৳
+                                                    {{ number_format($due->dueDetails->first()->amount, 2) }}</td>
+                                                <td class="text-center" style="vertical-align: middle;">
+                                                    <button class="btn btn-{{ $due->button_color }} btn-xs"
+                                                        style="width: 100%;letter-spacing: 2px;">
+                                                        {{ $due->dueDetails->first()->due_type }} </button>
+                                                </td>
+                                                <td style="vertical-align: middle;text-align:center;">
+                                                    <a class="btn btn-primary btn-block"
+                                                        href="{{ route('customer.due.show', $due) }}">View Details</a>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

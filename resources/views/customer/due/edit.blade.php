@@ -39,17 +39,23 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('customer.due.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('customer.due.update',$dueDetails) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('put')
+
+                                <input type="hidden" name="due_details_id" value="{{ $dueDetails->id }}">
+                                <input type="hidden" name="due_id" value="{{ $dueDetails->due->id }}">
+
                                 <div class="d-flex justify-content-start">
                                     <div class="form-group mr-2">
-                                        <label for="">Select Date</label>
+                                        <label for="">Select Date:</label>
                                         <input type="datetime-local" name="current_date" id="" class="form-control"
-                                            value="{{ date('Y-m-d') }}">
+                                            {{-- value="{{ $dueDetails->deuDetails[0]->created_at }}"--}}> 
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Add Image</label>
                                         <input type="file" name="image" id="image" class="form-control">
+                                        <img src="{{ asset($dueDetails->image) }}" style="height:50px">
                                     </div>
                                 </div>
 
@@ -64,21 +70,21 @@
                                                 <div class="form-group d-flex justify-content-between">
                                                     <div class="icheck-success">
                                                         <input type="radio" name="due_to" id="radioSuccess1"
-                                                            value="Consumer" checked>
+                                                            value="Consumer" @if($dueDetails->due->due_to == 'Consumer') checked @endif>
                                                         <label for="radioSuccess1">
                                                             Consumer
                                                         </label>
                                                     </div>
                                                     <div class="icheck-success">
                                                         <input type="radio" name="due_to" id="radioSuccess2"
-                                                            value="Supplier">
+                                                            value="Supplier" @if($dueDetails->due->due_to == 'Supplier') checked @endif>
                                                         <label for="radioSuccess2">
                                                             Supplier
                                                         </label>
                                                     </div>
                                                     <div class="icheck-success">
                                                         <input type="radio" name="due_to" id="radioSuccess3"
-                                                            value="Employee">
+                                                            value="Employee" @if($dueDetails->due->due_to == 'Employee') checked @endif>
                                                         <label for="radioSuccess3">
                                                             Employee
                                                         </label>
@@ -99,14 +105,14 @@
                                                 <!-- checkbox -->
                                                 <div class="form-group d-flex justify-content-between">
                                                     <div class="icheck-danger">
-                                                        <input type="radio" name="due_type" id="radiodanger4" value="Due" checked>
+                                                        <input type="radio" name="due_type" id="radiodanger4" value="Due" @if($dueDetails->due_type === 'Due') checked @endif>
                                                         <label for="radiodanger4">
                                                             Due
                                                         </label>
                                                     </div>
                                                     <div class="icheck-success">
                                                         <input type="radio" name="due_type" id="radioSuccess5"
-                                                            value="Deposit">
+                                                            value="Deposit" @if($dueDetails->due_type === 'Deposit') checked @endif>
                                                         <label for="radioSuccess5">
                                                             Deposit
                                                         </label>
@@ -121,22 +127,22 @@
                                 <div class="form-group consumer_body">
                                     <label>Name</label>
                                     <select class="form-control js-example-tags" style="width: 100%;" name="due_to_id">
-                                        
+                                        <option value="{{ $dueDetails->due->due_to_id }}">{{ $dueDetails->due->due_to_name }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone number</label>
-                                    <input type="number" class="form-control" name="phone"
+                                    <input type="number" class="form-control" name="phone" value="{{ $dueDetails->due->due_to_phone }}"
                                         placeholder="Enter phone number">
                                 </div>
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input type="number" class="form-control" name="amount" placeholder="Enter due amount"
+                                    <input type="number" class="form-control" name="amount" value="{{ $dueDetails->amount }}" placeholder="Enter due amount"
                                         required>
                                 </div>
                                 <div class="form-group">
                                     <label>Due details(optional)</label>
-                                    <textarea rows="2" class="form-control" name="details" placeholder="Enter due details"></textarea>
+                                    <textarea rows="2" class="form-control" name="details" placeholder="Enter due details">{{ $dueDetails->details }}</textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>

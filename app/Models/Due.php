@@ -13,4 +13,14 @@ class Due extends Model {
     public function dueDetails() {
         return $this->hasMany(DueDetail::class);
     }
+
+    public function getButtonColorAttribute() {
+
+        if ($this->dueDetails->first()->due_type === 'Deposit') {
+            return 'success';
+        } elseif ($this->dueDetails->first()->due_type === 'Due') {
+            return 'danger';
+        }
+
+    }
 }

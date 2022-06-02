@@ -39,13 +39,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('customer.due.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('customer.due.storeDueDeposit') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="due_id" value="{{ $id }}">
                                 <div class="d-flex justify-content-start">
                                     <div class="form-group mr-2">
                                         <label for="">Select Date</label>
-                                        <input type="datetime-local" name="current_date" id="" class="form-control"
-                                            value="{{ date('Y-m-d') }}">
+                                        <input type="datetime-local" name="current_date" id="" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Add Image</label>
@@ -53,42 +54,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card card-success">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Select to due category</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <!-- checkbox -->
-                                                <div class="form-group d-flex justify-content-between">
-                                                    <div class="icheck-success">
-                                                        <input type="radio" name="due_to" id="radioSuccess1"
-                                                            value="Consumer" checked>
-                                                        <label for="radioSuccess1">
-                                                            Consumer
-                                                        </label>
-                                                    </div>
-                                                    <div class="icheck-success">
-                                                        <input type="radio" name="due_to" id="radioSuccess2"
-                                                            value="Supplier">
-                                                        <label for="radioSuccess2">
-                                                            Supplier
-                                                        </label>
-                                                    </div>
-                                                    <div class="icheck-success">
-                                                        <input type="radio" name="due_to" id="radioSuccess3"
-                                                            value="Employee">
-                                                        <label for="radioSuccess3">
-                                                            Employee
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                
                                 <div class="card card-success">
                                     <div class="card-header">
                                         <h3 class="card-title">Select to due mode</h3>
@@ -99,14 +65,15 @@
                                                 <!-- checkbox -->
                                                 <div class="form-group d-flex justify-content-between">
                                                     <div class="icheck-danger">
-                                                        <input type="radio" name="due_type" id="radiodanger4" value="Due" checked>
+                                                        <input type="radio" name="due_type" id="radiodanger4" value="Due"
+                                                            @if($text === 'plus') checked @endif>
                                                         <label for="radiodanger4">
                                                             Due
                                                         </label>
                                                     </div>
                                                     <div class="icheck-success">
                                                         <input type="radio" name="due_type" id="radioSuccess5"
-                                                            value="Deposit">
+                                                            value="Deposit" @if($text === '-') checked @endif>
                                                         <label for="radioSuccess5">
                                                             Deposit
                                                         </label>
@@ -117,18 +84,6 @@
                                     </div>
                                 </div>
 
-                                {{--  --}}
-                                <div class="form-group consumer_body">
-                                    <label>Name</label>
-                                    <select class="form-control js-example-tags" style="width: 100%;" name="due_to_id">
-                                        
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Phone number</label>
-                                    <input type="number" class="form-control" name="phone"
-                                        placeholder="Enter phone number">
-                                </div>
                                 <div class="form-group">
                                     <label>Amount</label>
                                     <input type="number" class="form-control" name="amount" placeholder="Enter due amount"
@@ -159,7 +114,7 @@
         $(".js-example-tags").select2({
             tags: true
         });
-        
+
         $(document).ready(function() {
             $('input[name="due_to"]').on('click', function() {
                 var category = $(this).val();
@@ -182,7 +137,7 @@
                 }
             })
 
-            
+
         });
     </script>
 @endsection

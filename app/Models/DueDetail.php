@@ -13,4 +13,14 @@ class DueDetail extends Model {
     public function due() {
         return $this->belongsTo(Due::class);
     }
+
+    public function getBCAttribute() {
+
+        if ($this->due_type === 'Deposit') {
+            return 'success';
+        } elseif ($this->due_type === 'Due') {
+            return 'danger';
+        }
+
+    }
 }

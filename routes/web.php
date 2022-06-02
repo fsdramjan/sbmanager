@@ -109,10 +109,16 @@ Route::prefix('/customer')->as('customer.')->middleware('auth:customer')->group(
         Route::get('/details/{id}', 'transactionDetails')->name('transactionDetails');
     });
 
-    Route::controller(DueController::class)->prefix('/due')->as('due.')->group(function(){
-        Route::get('/','index')->name('index');
-        Route::get('/create','create')->name('create');
-        Route::post('/store','store')->name('store');
+    Route::controller(DueController::class)->prefix('/due')->as('due.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::put('/update/{id}', 'update')->name('update');
+        Route::delete('/delete/{id}', 'delete')->name('delete');
+        Route::get('/due-or-deposit/{id}/{text}', 'showDueDeposit')->name('showDueDeposit');
+        Route::post('/store/due-or-deposit', 'storeDueDeposit')->name('storeDueDeposit');
     });
 });
 
